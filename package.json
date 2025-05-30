@@ -1,12 +1,17 @@
 {
-	"name": "simple-express-crud-api",
-	"version": "0.1.0",
-	"private": true,
-	"scripts": {
-		"start": "node server.js"
-	},
-	"dependencies": {
-		"body-parser": "^1.19.0",
-		"express": "^4.17.1"
-	}
+  "name": "simple-express-crud-api",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
+  },
+  "description": "This is just a simple CRUD API of Books made with Express. The aim is to provide an API as starting point to other implementations or tests.",
+  "main": "server.js",
+  "devDependencies": {},
+  "author": "",
+  "license": "ISC"
 }

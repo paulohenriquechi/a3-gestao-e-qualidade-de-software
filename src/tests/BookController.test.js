@@ -1,4 +1,5 @@
-import { BookController } from "../src/controllers/BookController.js";
+import { jest } from '@jest/globals';
+import { BookController } from "../controllers/BookController.js";
 
 describe("BookController", () => {
     let controller;

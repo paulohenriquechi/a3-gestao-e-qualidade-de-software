@@ -1,4 +1,5 @@
-import { BookService } from "../services/BookService.js";
+import { jest } from '@jest/globals';
+import { BookService } from '../services/BookService.js';
 
 const mockPrisma = {
     book: {
@@ -10,11 +11,9 @@ const mockPrisma = {
     },
 };
 
-jest.mock("@prisma/client", () => {
-    return {
-        PrismaClient: jest.fn().mockImplementation(() => mockPrisma),
-    };
-});
+jest.unstable_mockModule('@prisma/client', () => ({
+  PrismaClient: jest.fn().mockImplementation(() => mockPrisma),
+}));
 
 describe("BookService",() => {
     let service;

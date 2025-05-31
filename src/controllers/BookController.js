@@ -1,5 +1,5 @@
 import { BookDTO } from "../models/BookSchema.js";
-
+import { getZodError } from "../utils/utils.js";
 class BookController {
   constructor(bookService) {
     this.bookService = bookService;
@@ -11,7 +11,7 @@ class BookController {
 
       res.status(200).json({
         message: "Books retrieved successfully",
-        data: books
+        data: books,
       });
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -22,9 +22,9 @@ class BookController {
     const { data, success, error } = BookDTO.safeParse(req.body);
 
     if (!success) {
-      const message = error.errors.map(err => err.message)[0];
+      const errorMessage = getZodError(error.errors);
 
-      return res.status(400).json({ error: message });
+      return res.status(400).json({ error: errorMessage });
     }
 
     try {
@@ -32,7 +32,7 @@ class BookController {
 
       res.status(201).json({
         message: "Book created successfully",
-        data: book
+        data: book,
       });
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -55,7 +55,7 @@ class BookController {
 
       res.status(200).json({
         message: "Book retrieved successfully",
-        data: book
+        data: book,
       });
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -73,9 +73,9 @@ class BookController {
       const { data, success, error } = BookDTO.safeParse(req.body);
 
       if (!success) {
-        const message = error.errors.map(err => err.message)[0];
+        const errorMessage = getZodError(error.errors);
 
-        return res.status(400).json({ error: message });
+        return res.status(400).json({ error: errorMessage });
       }
 
       const book = await this.bookService.update(id, data);
@@ -86,7 +86,7 @@ class BookController {
 
       res.status(200).json({
         message: "Book updated successfully",
-        data: book
+        data: book,
       });
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -107,7 +107,10 @@ class BookController {
         return res.status(404).json({ error: "Book not found" });
       }
 
-      res.status(204).send();
+      res.status(204).json({
+        message: "Book deleted successfully",
+        data: null,
+      });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }

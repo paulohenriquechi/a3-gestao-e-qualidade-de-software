@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "test": "jest",
     "start": "nodemon src/server.js"
   },
   "dependencies": {

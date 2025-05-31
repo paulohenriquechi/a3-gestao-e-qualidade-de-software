@@ -1,3 +1,5 @@
+import { BookDTO } from "../models/BookSchema.js";
+
 class BookController {
   constructor(bookService) {
     this.bookService = bookService;
@@ -6,16 +8,32 @@ class BookController {
   async getAll(req, res) {
     try {
       const books = await this.bookService.getAll();
-      res.status(200).json(books);
+
+      res.status(200).json({
+        message: "Books retrieved successfully",
+        data: books
+      });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
   }
 
   async create(req, res) {
+    const { data, success, error } = BookDTO.safeParse(req.body);
+
+    if (!success) {
+      const message = error.errors.map(err => err.message)[0];
+
+      return res.status(400).json({ error: message });
+    }
+
     try {
-      const book = await this.bookService.create(req.body);
-      res.status(201).json(book);
+      const book = await this.bookService.create(data);
+
+      res.status(201).json({
+        message: "Book created successfully",
+        data: book
+      });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
@@ -23,11 +41,22 @@ class BookController {
 
   async getById(req, res) {
     try {
-      const book = await this.bookService.getById(req.params.id);
-      if (!book) {
-        return res.status(404).json({ message: "Book not found" });
+      const { id } = req.params;
+
+      if (!id) {
+        return res.status(400).json({ error: "Book ID is required" });
       }
-      res.status(200).json(book);
+
+      const book = await this.bookService.getById(id);
+
+      if (!book) {
+        return res.status(404).json({ error: "Book not found" });
+      }
+
+      res.status(200).json({
+        message: "Book retrieved successfully",
+        data: book
+      });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
@@ -35,11 +64,30 @@ class BookController {
 
   async update(req, res) {
     try {
-      const book = await this.bookService.update(req.params.id, req.body);
-      if (!book) {
-        return res.status(404).json({ message: "Book not found" });
+      const { id } = req.params;
+
+      if (!id) {
+        return res.status(400).json({ error: "Book ID is required" });
       }
-      res.status(200).json(book);
+
+      const { data, success, error } = BookDTO.safeParse(req.body);
+
+      if (!success) {
+        const message = error.errors.map(err => err.message)[0];
+
+        return res.status(400).json({ error: message });
+      }
+
+      const book = await this.bookService.update(id, data);
+
+      if (!book) {
+        return res.status(404).json({ error: "Book not found" });
+      }
+
+      res.status(200).json({
+        message: "Book updated successfully",
+        data: book
+      });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
@@ -47,10 +95,18 @@ class BookController {
 
   async delete(req, res) {
     try {
-      const result = await this.bookService.delete(req.params.id);
-      if (!result) {
-        return res.status(404).json({ message: "Book not found" });
+      const { id } = req.params;
+
+      if (!id) {
+        return res.status(400).json({ error: "Book ID is required" });
       }
+
+      const result = await this.bookService.delete(id);
+
+      if (!result) {
+        return res.status(404).json({ error: "Book not found" });
+      }
+
       res.status(204).send();
     } catch (error) {
       res.status(500).json({ error: error.message });

@@ -10,11 +10,13 @@
     "@prisma/client": "^6.8.2",
     "body-parser": "^1.19.0",
     "dotenv": "^16.5.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "zod": "^3.25.42"
   },
   "description": "Refatoração de Código e Boas Práticas do Clean Code ",
   "main": "server.js",
   "devDependencies": {
+    "jest": "^29.7.0",
     "nodemon": "^3.1.10",
     "prisma": "^6.8.2"
   },

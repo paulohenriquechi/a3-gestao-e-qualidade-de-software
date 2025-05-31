@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "test": "jest",
     "start": "nodemon src/server.js"
   },
   "dependencies": {
@@ -15,6 +16,7 @@
   "description": "Refatoração de Código e Boas Práticas do Clean Code ",
   "main": "server.js",
   "devDependencies": {
+    "jest": "^29.7.0",
     "nodemon": "^3.1.10",
     "prisma": "^6.8.2"
   },

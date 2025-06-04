@@ -9,12 +9,12 @@ class BookController {
     try {
       const books = await this.bookService.getAll();
 
-      res.status(200).json({
+      return res.status(200).json({
         message: "Books retrieved successfully",
         data: books,
       });
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      return res.status(500).json({ error: error.message });
     }
   }
 
@@ -30,12 +30,12 @@ class BookController {
     try {
       const book = await this.bookService.create(data);
 
-      res.status(201).json({
+      return res.status(201).json({
         message: "Book created successfully",
         data: book,
       });
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      return res.status(500).json({ error: error.message });
     }
   }
 
@@ -53,12 +53,12 @@ class BookController {
         return res.status(404).json({ error: "Book not found" });
       }
 
-      res.status(200).json({
+      return res.status(200).json({
         message: "Book retrieved successfully",
         data: book,
       });
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      return res.status(500).json({ error: error.message });
     }
   }
 
@@ -84,12 +84,12 @@ class BookController {
         return res.status(404).json({ error: "Book not found" });
       }
 
-      res.status(200).json({
+      return res.status(200).json({
         message: "Book updated successfully",
         data: book,
       });
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      return res.status(500).json({ error: error.message });
     }
   }
 
@@ -107,12 +107,9 @@ class BookController {
         return res.status(404).json({ error: "Book not found" });
       }
 
-      res.status(204).json({
-        message: "Book deleted successfully",
-        data: null,
-      });
+      return res.status(204).send();
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      return res.status(500).json({ error: error.message });
     }
   }
 }

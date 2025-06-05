@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js",
+    "test": "set NODE_ENV=test&& set DOTENV_CONFIG_PATH=.env.test&& node --require dotenv/config --experimental-vm-modules ./node_modules/jest/bin/jest.js",
     "start": "nodemon src/server.js"
   },
   "dependencies": {

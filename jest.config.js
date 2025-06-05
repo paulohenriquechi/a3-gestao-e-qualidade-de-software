@@ -3,3 +3,5 @@ export default {
   roots: ["<rootDir>/src/tests"],
   transform: {},
 };
+
+process.env.DATABASE_URL = "file:./test.db";

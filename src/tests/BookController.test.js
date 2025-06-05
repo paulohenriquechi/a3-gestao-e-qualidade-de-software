@@ -1,5 +1,6 @@
-import { jest } from "@jest/globals";
+import { beforeAll, jest } from "@jest/globals";
 import { BookController } from "../controllers/BookController.js";
+import { execSync } from 'child_process';
 
 describe("BookController", () => {
     let res;
@@ -18,6 +19,10 @@ describe("BookController", () => {
             params,
         };
     }
+
+    beforeAll(() => {
+        execSync("npx prisma migrate deploy", { stdio: "inherit" });
+    });
 
     beforeEach(() => {
         res = mockRes();

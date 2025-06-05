@@ -6,10 +6,10 @@ const router = Router();
 const bookService = new BookService();
 const bookController = new BookController(bookService);
 
-router.get("/", (req, res) => bookController.getAll(req, res));
-router.post("/", (req, res) => bookController.create(req, res));
-router.get("/:id", (req, res) => bookController.getById(req, res));
-router.put("/:id", (req, res) => bookController.update(req, res));
-router.delete("/:id", (req, res) => bookController.delete(req, res));
+router.get("/books", (req, res) => bookController.getAll(req, res));
+router.post("/books", (req, res) => bookController.create(req, res));
+router.get("/books/:id", (req, res) => bookController.getById(req, res));
+router.put("/books/:id", (req, res) => bookController.update(req, res));
+router.delete("/books/:id", (req, res) => bookController.delete(req, res));
 
 export { router as default };

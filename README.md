@@ -33,10 +33,12 @@ Nosso projeto da matéria de Gestão e Qualidade de Software possui o objetivo d
    ```
 
 3. **Configure as variaveis de ambiente**
+
    Copie os arquivos `.env.example`, `.env.test.example` para `.env`, `.env.test` e ajuste se necessário.
 
 4. **Configure o banco de dados:**
    Rode as migrations do Prisma:
+
      ```sh
      npx prisma migrate dev --name init
      ```

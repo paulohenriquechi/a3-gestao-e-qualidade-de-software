@@ -27,4 +27,5 @@ yarn-error.log*
 .env
 .env.test
 prisma/*.db
+prisma/*.db-journal
 /src/generated/prisma
